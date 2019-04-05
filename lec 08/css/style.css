@@ -24,3 +24,42 @@ https://static.pexels.com/photos/133459/pexels-photo-133459.jpeg
 https://static.pexels.com/photos/50988/ape-berber-monkeys-mammal-affchen-50988.jpeg
 */
 
+h1{
+    font-size: 3em;
+    font-family: Harrington;
+    border-bottom: 2px solid gray;
+    border-right: 2px solid gray;
+    width:600px;
+    box-shadow: 0 0 3px #673AB7;
+    margin: 10px 0 10px 0; /*top right botto left*/
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row-reverse;
+
+}
+
+img{
+    width:450px;
+    height: 300px;
+    margin: 10px;
+    transition: all 12ms ;
+}
+
+img:hover{
+    transform: scale(1.1);
+
+}
+
+
+/*
+Use justify-content again to help these frogs get to their lilypads. Remember that this CSS property aligns items horizontally and accepts the following values:
+
+flex-start: Items align to the left side of the container.
+flex-end: Items align to the right side of the container.
+center: Items align at the center of the container.
+space-between: Items display with equal spacing between them.
+space-around: Items display with equal spacing around them.
+*/
