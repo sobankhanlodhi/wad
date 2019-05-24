@@ -8,13 +8,14 @@ var pdInput = document.getElementById("pounds");
 var kgInput = document.getElementById("kg");
 var un = document.getElementById("username");
 var users = document.getElementById("users");
-//btnBMI.addEventListener("click",computeBMI());
+btnBMI.addEventListener("click",computeBMI());
 
 
 ws.addEventListener("click",function(){
     pdInput.classList.toggle("hide");
     kgInput.classList.toggle("hide");
     ws.innerText = ws.innerText === "Switch to Kg"? "Switch to Pounds" : "Switch to Kg";
+
 })
 
 hs.addEventListener("click",function()
@@ -62,7 +63,7 @@ function computeBMI()
 
     if(output<18.5)
     {
-        displayResult(output," underweight with bmi ","images/under.jpg");
+        displayResult(output," underweight with bmi ","/images/under.jpg");
     }
     else if(output>=18.5 && output<=24.9)
     {
@@ -92,10 +93,10 @@ function displayResult(bmiValue, bmiMsg, imgName) {
 }
 
 function clearFields() {
-    cmInput.input='';
-    ftInput.input='';
-    inInput.input='';
-    pdInput.input='';
-    kgInput.input='';
+    cmInput.value='';
+    ftInput.value='';
+    inInput.value='';
+    pdInput.value='';
+    kgInput.value='';
     /*Code below for Question 3 Part 4 */
 }

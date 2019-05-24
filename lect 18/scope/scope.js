@@ -29,7 +29,7 @@ function bb() {
     console.log(b);
 }
 console.log(b);
-//--------------------------------------------------
+//-------------------------------------------------- local scope me global scope access kr skty hain
 
 var x = 100;
 
