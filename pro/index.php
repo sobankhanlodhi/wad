@@ -112,7 +112,24 @@ $con = mysqli_connect("localhost","root","","tech_box_db");
     <article id="content" class="container-fluid bg-white">
 
         <div class="row">
-                Coming Soon
+            <ul class="collapse show list-unstyled" id="pageSubmenu">
+                <?php
+                $getProductsQuery = "select * from products";
+                $getProductsResult = mysqli_query($con,$getProductsQuery);
+                while($row = mysqli_fetch_assoc($getProductsResult)){
+                    $Products_title = $row['pro_title'];
+                    $Products_cat = $row['pro_cat'];
+                    $Products_brand = $row['pro_brand'];
+                    $Products_price = $row['pro_price'];
+                    $Products_desc = $row['pro_desc'];
+                    $Products_keywords = $row['pro_keywords'];
+                    $Products_image = $row['pro_image'];
+                    echo "<li><a class='nav-link'  href='#'>$Products_title</a></li>";
+                    echo "<li><img src='admin/pro_images/download.jpg'  href='admin/pro_images'>$Products_image</a></li>";
+                    echo "<li><a class='nav-link'  href='#'>$Products_price</a></li>";
+                }
+                ?>
+            </ul>
         </div>
     </article>
 
