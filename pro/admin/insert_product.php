@@ -15,15 +15,13 @@ if(isset($_POST['insert_pro'])){
     $pro_desc = $_POST['pro_desc'];
     $pro_keywords = $_POST['pro_keywords'];
 
-    /*print_r ($_FILES['pro_image']['name']);   */
+    //getting image from the field
+    $pro_image = $_FILES['pro_image']['name'];
+    $pro_image_tmp = $_FILES['pro_image']['tmp_name'];
+    move_uploaded_file($pro_image_tmp,"product_images/$pro_image");
 
-    $pro_image = $_FILES ['pro_image']['name'];
-    $tmp_image = $_FILES ['pro_image']['tmp_name'];
-
-    move_uploaded_file($tmp_image,"pro_images/".$pro_image);
-
-    $insert_product = "insert into products (pro_cat, pro_brand,pro_title,pro_price,pro_desc,pro_keywords,pro_image)
-                  VALUES ('$pro_cat','$pro_brand','$pro_title','$pro_price','$pro_desc','$pro_keywords',$pro_image);";
+    $insert_product = "insert into products (pro_cat, pro_brand,pro_title,pro_price,pro_desc,pro_keywords,pro_image) 
+                  VALUES ('$pro_cat','$pro_brand','$pro_title','$pro_price','$pro_desc','$pro_keywords','$pro_image');";
     $insert_pro = mysqli_query($con, $insert_product);
     if($insert_pro){
         header("location: ".$_SERVER['PHP_SELF']);
