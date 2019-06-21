@@ -22,53 +22,47 @@ function getBrands(){
     }
 }
 
-function getProducts(){
+
+function getPro(){
     global $con;
-    $getProductQuery= "";
-    if(isset($_GET['cat'])){
-        $cat_id = $_GET['cat'];
-        $getProductQuery = "select * from products where pro_cat = '$cat_id'";
+    $getProQuery = '';
+    if(!isset($_GET['cat']) && !isset($_GET['brand']) && !isset($_GET['search'])){
+        $getProQuery = "select * from products order by RAND();";
+    }
+    else if(isset($_GET['cat'])){
+        $pro_cat_id = $_GET['cat'];
+        $getProQuery = "select * from products where pro_cat = '$pro_cat_id'";
     }
     else if(isset($_GET['brand'])){
-        $brand_id = $_GET['brand'];
-        $getProductQuery = "select * from products where pro_brand = '$brand_id'";
+        $pro_brand_id = $_GET['brand'];
+        $getProQuery = "select * from products where pro_brand = '$pro_brand_id'";
     }
     else if(isset($_GET['search'])){
-        $q = $_GET['search'];
-        $getProductQuery = "select * from products where pro_keywords like '%$q%'";
+        $user_query = $_GET['search'];
+        $getProQuery = "select * from products where pro_keywords like '%$user_query%'";
     }
-    else{
-        $getProductQuery = "select * from products order by RAND()";
+    $getProResult = mysqli_query($con,$getProQuery);
+    $count_pro = mysqli_num_rows($getProResult);
+    if($count_pro==0){
+        echo "<h4 class='alert-warning align-center my-2 p-2'> No Product found in selected criteria </h4>";
     }
-
-    /*$getProductQuery = "select * from products order by RAND()";*/
-    $getProductResult = mysqli_query($con,$getProductQuery);
-
-    if(mysqli_num_rows($getProductResult)==0){
-        echo "<h2>No Products in this Selected Criteria </h2>";
-    }
-    else {
-        while ($row = mysqli_fetch_assoc($getProductResult)) {
-            $title = $row['pro_id'];
-            $price = $row['pro_price'];
-            $image = $row['pro_image'];
-            echo "
-            <div class='col-sm-6 col-md-4 col-lg-3 text-center product-summary'>
-                <h5 class='text-capitalize'> $title </h5>
-                <img src='admin/product_images/$image'>
-                <p> <b> Rs $price/-  </b> </p>
-                <a href='#' class='btn btn-info btn-sm'>Details</a>
-                <a href='#'>
-                    <button class='btn btn-primary btn-sm'>
-                        <i class='fas fa-cart-plus'></i> Add to Cart
-                    </button>
-                </a>
-            </div>
-            
-            ";
-        }
+    while($row = mysqli_fetch_assoc($getProResult)){
+        $pro_id = $row['pro_id'];
+        $pro_title = $row['pro_title'];
+        $pro_price = $row['pro_price'];
+        $pro_image = $row['pro_image'];
+        echo "
+                <div class='col-sm-6 col-md-4 col-lg-3 text-center product-summary'>
+                    <h5 class='text-capitalize'>$pro_title</h5>
+                    <img src='admin/product_images/$pro_image'>
+                    <p> <b> Rs $pro_price/-  </b> </p>
+                    <a href='detail.php' class='btn btn-info btn-sm'>Details</a>
+                    <a href='#'>
+                        <button class='btn btn-primary btn-sm'>
+                            <i class='fas fa-cart-plus'></i> Add to Cart
+                        </button>
+                    </a>
+                </div>
+        ";
     }
 }
-
-
-
