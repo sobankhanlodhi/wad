@@ -1,6 +1,11 @@
 <?php
 require_once "db_connection.php";
 
+
+if(isset($_GET['search'])){
+    getPro();
+}
+
 function getCats(){
     global $con;
     $getCatsQuery = "select * from categories";
